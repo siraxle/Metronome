@@ -19,6 +19,7 @@ public class Launcher extends Application {
   Button button;
   Text bpmLabel;
   TextField bpmInput;
+
   public static void main(String[] args) {
     launch(args);
   }
@@ -35,6 +36,7 @@ public class Launcher extends Application {
         Thread clicking = new Thread(new Runnable() {
           @Override
           public void run() {
+            MakeSound sound = new MakeSound();
             while (!toExit) {
               i++;
               long time =(long) 60000 / Long.parseLong(bpmInput.getText());
@@ -44,6 +46,7 @@ public class Launcher extends Application {
                 e.printStackTrace();
               }
               System.out.println(i);
+              sound.playSound("/Users/efremov/Documents/java_projects/metronome/assets/click.wav");
             }
           }
         });
@@ -78,32 +81,6 @@ public class Launcher extends Application {
     this.root.setTop(button);
     this.root.setAlignment(button, Pos.CENTER);
     button.setOnAction(this.handler);
-
-    //click on START button
-//    button.setOnAction(new EventHandler<ActionEvent>() {
-//      @Override
-//      public void handle(ActionEvent event) {
-//        boolean isContinue = true;
-//        if (button.getText().equals("STOP")) {
-//          button.setText("START");
-//          System.out.println("pressed stop button");
-//          isContinue = false;
-//        } else {
-//          button.setText("STOP");
-//          System.out.println("pressed start button");
-//          while (isContinue) {
-//            i++;
-//            try {
-//              Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//              e.printStackTrace();
-//            }
-//            System.out.println(i);
-//          }
-//        }
-//        System.out.println(isContinue);
-//      }
-//    });
 
     this.scene = new Scene(root, 300, 300);
     primaryStage.setScene(this.scene);
