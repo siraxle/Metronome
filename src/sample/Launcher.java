@@ -30,23 +30,36 @@ public class Launcher extends Application {
       String[] strings = event.getTarget().toString().split("'");
       String buttonName = strings[1];
       System.out.println(buttonName);
-      if (buttonName.equals("START")) {
+      if (buttonName.equals("START") && !bpmInput.getText().isEmpty()) {
         toExit = false;
-        button.setText("STOP");
+        try {
+          Integer.parseInt(bpmInput.getText());
+          button.setText("STOP");
+        } catch (NumberFormatException e) {
+          System.out.println("BPM не число");
+        }
         Thread clicking = new Thread(new Runnable() {
           @Override
           public void run() {
             MakeSound sound = new MakeSound();
             while (!toExit) {
               i++;
-              long time =(long) 60000 / Long.parseLong(bpmInput.getText());
               try {
-                Thread.sleep(time);
-              } catch (InterruptedException e) {
-                e.printStackTrace();
+                long time = (long) 60000 / Long.parseLong(bpmInput.getText());
+                try {
+                  Thread.sleep(time);
+                } catch (InterruptedException e) {
+                  e.printStackTrace();
+                }
+                System.out.println(i);
+                sound.playSound("/Users/efremov/Documents/java_projects/metronome/assets/clickSimple.wav");
+              } catch (NumberFormatException e) {
+                System.out.println("Введите числовое значение BPM");
+                bpmInput.clear();
+                bpmInput.setPromptText("Введите числовое значение BPM");
+                break;
               }
-              System.out.println(i);
-              sound.playSound("/Users/efremov/Documents/java_projects/metronome/assets/click.wav");
+
             }
           }
         });
