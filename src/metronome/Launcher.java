@@ -1,4 +1,4 @@
-package sample;
+package metronome;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 public class Launcher extends Application {
   Scene scene;
@@ -41,18 +44,21 @@ public class Launcher extends Application {
         Thread clicking = new Thread(new Runnable() {
           @Override
           public void run() {
-            MakeSound sound = new MakeSound();
+            File file = new File("/Users/efremov/Documents/java_projects/metronome/assets/clickSimple.wav");
+            Sound sound = new Sound(file);
             while (!toExit) {
               i++;
               try {
-                long time = (long) 60000 / Long.parseLong(bpmInput.getText());
+                long time = 60000 / Long.parseLong(bpmInput.getText());
+                System.out.println(time);
                 try {
-                  Thread.sleep(time);
+                  TimeUnit.MILLISECONDS.sleep(time);
                 } catch (InterruptedException e) {
                   e.printStackTrace();
                 }
                 System.out.println(i);
-                sound.playSound("/Users/efremov/Documents/java_projects/metronome/assets/clickSimple.wav");
+                sound.play();
+//                sound.playSound("assets/clickSimple.wav");
               } catch (NumberFormatException e) {
                 System.out.println("Введите числовое значение BPM");
                 bpmInput.clear();
