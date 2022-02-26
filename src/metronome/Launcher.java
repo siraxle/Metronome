@@ -36,8 +36,8 @@ public class Launcher extends Application {
         button.setText("STOP");
         startClicking(bpmValue);
       } else {
-        button.setText("START");
         isPlaying = true;
+        button.setText("START");
         clickAmount = 0;
       }
     }
@@ -117,7 +117,6 @@ public class Launcher extends Application {
             bpmInput.setPromptText("Введите числовое значение BPM");
             break;
           }
-
         }
       }
     });
