@@ -11,7 +11,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" depthTest="DISABLE" text="METRONOME" textAlignment="CENTER">
@@ -24,20 +23,12 @@
       </Label>
       <FlowPane prefHeight="104.0" prefWidth="400.0">
          <children>
-            <TextField alignment="TOP_LEFT" prefHeight="50.0" prefWidth="110.0" promptText="set time signature here">
+            <TextField fx:id="bpmInput" alignment="CENTER" layoutX="40.0" layoutY="40.0" prefHeight="50.0" prefWidth="110.0" promptText="set BPM here">
                <FlowPane.margin>
-                  <Insets left="70.0" top="30.0" />
+                  <Insets left="155.0" top="30.0" />
                </FlowPane.margin>
                <font>
-                  <Font size="12.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="bpmInput" alignment="TOP_LEFT" layoutX="40.0" layoutY="40.0" prefHeight="50.0" prefWidth="110.0" promptText="set BPM here">
-               <FlowPane.margin>
-                  <Insets left="60.0" top="30.0" />
-               </FlowPane.margin>
-               <font>
-                  <Font size="12.0" />
+                  <Font name="Times New Roman" size="14.0" />
                </font>
             </TextField>
          </children>
@@ -47,22 +38,19 @@
             <Insets left="145.0" />
          </VBox.margin>
       </Button>
-      <HBox prefHeight="50.0" prefWidth="400.0">
-         <children>
-            <CheckBox mnemonicParsing="false" prefHeight="51.0" prefWidth="0.0">
-               <HBox.margin>
-                  <Insets left="165.0" />
-               </HBox.margin>
-            </CheckBox>
-            <CheckBox layoutX="60.0" layoutY="10.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="0.0" />
-            <CheckBox layoutX="84.0" layoutY="10.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="0.0" />
-            <CheckBox layoutX="108.0" layoutY="10.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="0.0" />
-         </children>
-      </HBox>
-      <Label prefHeight="27.0" prefWidth="258.0" text="set strong beat">
+      <HBox fx:id="strongBeatsArea" prefHeight="50.0" prefWidth="400.0" />
+      <Label prefHeight="27.0" prefWidth="288.0" text="set strong beat">
          <padding>
             <Insets left="167.0" />
          </padding>
       </Label>
+      <ChoiceBox fx:id="time_signature" prefWidth="150.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets left="135.0" />
+         </VBox.margin>
+      </ChoiceBox>
    </children>
 </VBox>
