@@ -11,7 +11,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" depthTest="DISABLE" text="METRONOME" textAlignment="CENTER">
          <VBox.margin>
@@ -38,19 +38,16 @@
             <Insets left="145.0" />
          </VBox.margin>
       </Button>
-      <HBox fx:id="strongBeatsArea" prefHeight="50.0" prefWidth="400.0" />
+      <HBox fx:id="strongBeatsArea" alignment="CENTER" prefHeight="50.0" prefWidth="400.0" />
       <Label prefHeight="27.0" prefWidth="288.0" text="set strong beat">
          <padding>
             <Insets left="167.0" />
          </padding>
       </Label>
-      <ChoiceBox fx:id="time_signature" prefWidth="150.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
+      <ComboBox fx:id="time_signature" prefWidth="150.0">
          <VBox.margin>
             <Insets left="135.0" />
          </VBox.margin>
-      </ChoiceBox>
+      </ComboBox>
    </children>
 </VBox>
