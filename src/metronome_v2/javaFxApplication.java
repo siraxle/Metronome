@@ -1,28 +1,30 @@
 package metronome_v2;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class javaFxApplication extends Application {
 
   private Button launchButton;
   private TextField bpmInput;
-  private int clickAmount = 0;
   private Metronome_v2 metronome;
   private ComboBox<String> choiceBoxes;
-  private HBox checkBoxArea = new HBox(10);
-//  private Label label = new Label();
+  static HBox checkBoxArea = new HBox(10);
+  private ArrayList<CheckBox> beats = new ArrayList<>(9);
+  private ArrayList<Integer> strongBeats = new ArrayList<>(9);
 
   public static void main(String[] args) {
     launch(args);
@@ -47,7 +49,6 @@ public class javaFxApplication extends Application {
     this.bpmInput = (TextField) panel.lookup("#bpmInput");
     this.choiceBoxes = (ComboBox<String>) panel.lookup("#time_signature");
     this.checkBoxArea = (HBox) panel.lookup("#strongBeatsArea");
-//    this.label = (Label) panel.lookup("#lableHBox");
   }
 
   private void setButtonHandlers() {
@@ -66,7 +67,7 @@ public class javaFxApplication extends Application {
             return;
           }
           metronome = new Metronome_v2(bpm);
-          metronome.start();
+          metronome.start(strongBeats);
           launchButton.setText("STOP");
         }
       }
@@ -86,7 +87,7 @@ public class javaFxApplication extends Application {
 
   private void setChoiceBoxes() {
     String[] signatures = {"3/4", "4/4", "5/4", "7/4", "9/4"};
-//    choiceBoxes.setValue("4/4");
+    choiceBoxes.setValue("set signature");
     choiceBoxes.getItems().addAll(signatures);
   }
 
@@ -99,9 +100,30 @@ public class javaFxApplication extends Application {
     String amountCheckBoxes = choiceBoxes.getValue().substring(0, 1);
     for (int i = 0; i < Integer.parseInt(amountCheckBoxes); i++) {
       CheckBox checkBox = new CheckBox();
+      checkBox.setId("checkBox_" + i);
+      EventHandler<ActionEvent> actionEventEventHandler = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+          strongBeats.clear();
+          for (int i = 0; i < beats.size(); i++) {
+            if (beats.get(i).isSelected()) {
+              strongBeats.add(i);
+            }
+          }
+          System.out.println(strongBeats);
+        }
+      };
+      checkBox.setOnAction(actionEventEventHandler);
       checkBoxArea.getChildren().add(checkBox);
     }
-    System.out.println(amountCheckBoxes);
+    ObservableList<Node> checkBoxes = checkBoxArea.getChildren();
+    for (Node n : checkBoxes) {
+      if (n instanceof CheckBox) {
+        beats.add((CheckBox) n);
+      }
+    }
+
+    System.out.println(checkBoxes.size());
   }
 
 }
