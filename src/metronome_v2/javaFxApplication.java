@@ -24,7 +24,7 @@ public class javaFxApplication extends Application {
   private ComboBox<String> choiceBoxes;
   static HBox checkBoxArea = new HBox(10);
   private ArrayList<CheckBox> beats = new ArrayList<>(9);
-  private ArrayList<Integer> strongBeats = new ArrayList<>(9);
+  private ArrayList<Integer> strongBeatsSignature = new ArrayList<>(9);
 
   public static void main(String[] args) {
     launch(args);
@@ -67,7 +67,7 @@ public class javaFxApplication extends Application {
             return;
           }
           metronome = new Metronome_v2(bpm);
-          metronome.start(strongBeats);
+          metronome.start(strongBeatsSignature);
           launchButton.setText("STOP");
         }
       }
@@ -79,6 +79,7 @@ public class javaFxApplication extends Application {
     EventHandler<ActionEvent> choiceHandler = new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
+        beats.clear();
         printCheckBoxArea();
       }
     };
@@ -104,13 +105,13 @@ public class javaFxApplication extends Application {
       EventHandler<ActionEvent> actionEventEventHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-          strongBeats.clear();
+          strongBeatsSignature.clear();
           for (int i = 0; i < beats.size(); i++) {
             if (beats.get(i).isSelected()) {
-              strongBeats.add(i);
-            }
+              strongBeatsSignature.add(i);
+            }else strongBeatsSignature.add(null);
           }
-          System.out.println(strongBeats);
+          System.out.println(strongBeatsSignature);
         }
       };
       checkBox.setOnAction(actionEventEventHandler);

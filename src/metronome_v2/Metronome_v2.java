@@ -10,26 +10,32 @@ public class Metronome_v2 {
   public int bpm = 60;
   Timer timer;
   TimerTask timerTask;
-  Integer signature = javaFxApplication.checkBoxArea.getChildren().size();
   Sound simpleSound = new Sound(new File("assets/clickSimple.wav"));
   Sound highSound = new Sound(new File("assets/clickHigh.wav"));
+  int barIndex = 0;
 
   public Metronome_v2(int bpm) {
     this.bpm = bpm;
   }
 
-  public void start(List<Integer> strongBeats) {
-    isPlaying = true;
+  public void start(List<Integer> signature) { //передал лист заполненый в сильных долях цифрами - остальное null
+    isPlaying = true;                            // [1, null, null, null]
     System.out.println("metronome is playing");
     timerTask = new TimerTask() {
       @Override
       public void run() {
-        if (strongBeats.size() > 0) {
-
+        if (signature.size() == 0) {
+          barIndex = barIndex % 4;
         } else {
-          System.out.println("tick");
+          barIndex = barIndex % signature.size();
+        }
+        System.out.println(barIndex);
+        if (signature.get(barIndex) != null) {
+          highSound.play();
+        } else {
           simpleSound.play();
         }
+        barIndex++;
       }
     };
     timer = new Timer();
@@ -44,3 +50,5 @@ public class Metronome_v2 {
   }
 
 }
+
+
