@@ -30,7 +30,7 @@ public class Metronome_v2 {
           barIndex = barIndex % signature.size();
         }
         System.out.println(barIndex);
-        if (signature.get(barIndex) != null) {
+        if (signature.size() > 0 && signature.get(barIndex) != null) {
           highSound.play();
         } else {
           simpleSound.play();
@@ -50,5 +50,3 @@ public class Metronome_v2 {
   }
 
 }
-
-
